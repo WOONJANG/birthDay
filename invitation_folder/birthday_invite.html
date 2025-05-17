@@ -16,7 +16,7 @@
 
     body {
       background: linear-gradient(135deg, #ffe6f0, #e0f7ff);
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .stars {
@@ -42,17 +42,20 @@
     }
 
     .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
       position: relative;
-      height: 100vh;
-      width: 100%;
       z-index: 1;
     }
 
     #buttonWrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
     }
 
     #openBtn {
@@ -65,7 +68,6 @@
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
       transition: 0.3s;
-      z-index: 2;
     }
 
     #openBtn:hover {
@@ -73,37 +75,30 @@
     }
 
     .invitation {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.95);
       background: white;
       border-radius: 2rem;
       padding: 2rem;
       box-shadow: 0 0 20px rgba(255, 192, 203, 0.6);
       text-align: center;
-      max-width: 600px;
+      margin-top: 2rem;
       opacity: 0;
-      transition: all 0.6s ease;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
 
     .invitation.show {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translateY(0);
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: #ff4d6d;
       margin-bottom: 1rem;
     }
 
     .typing {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #333;
       white-space: pre-wrap;
       min-height: 80px;
@@ -116,6 +111,7 @@
       padding: 1rem;
       margin: 1rem 0;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      font-size: 1rem;
     }
 
     footer {
@@ -123,17 +119,34 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+
+    /* 모바일 최적화 */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .typing {
+        font-size: 1rem;
+      }
+      .card {
+        font-size: 0.95rem;
+      }
+      #openBtn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <audio id="bgm" src="bgm.mp3" loop></audio>
   <div class="stars" id="stars"></div>
 
-  <div class="container">
-    <div id="buttonWrapper">
-      <button id="openBtn">💌 초대장 열기</button>
-    </div>
+  <div id="buttonWrapper">
+    <button id="openBtn">💌 초대장 열기</button>
+  </div>
 
+  <div class="container">
     <div class="invitation" id="inviteCard">
       <h1>✨ 전설의 장운 생일 초대장 ✨</h1>
       <div class="typing" id="typingText"></div>
